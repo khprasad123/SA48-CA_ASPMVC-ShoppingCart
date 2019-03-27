@@ -1,0 +1,7 @@
+C:\Users\Hariprasad Kottarath\source\repos\Tsting\Tsting\bin\Debug\Tsting.exe.config
+C:\Users\Hariprasad Kottarath\source\repos\Tsting\Tsting\bin\Debug\Tsting.exe
+C:\Users\Hariprasad Kottarath\source\repos\Tsting\Tsting\bin\Debug\Tsting.pdb
+C:\Users\Hariprasad Kottarath\source\repos\Tsting\Tsting\obj\Debug\Tsting.csprojAssemblyReference.cache
+C:\Users\Hariprasad Kottarath\source\repos\Tsting\Tsting\obj\Debug\Tsting.csproj.CoreCompileInputs.cache
+C:\Users\Hariprasad Kottarath\source\repos\Tsting\Tsting\obj\Debug\Tsting.exe
+C:\Users\Hariprasad Kottarath\source\repos\Tsting\Tsting\obj\Debug\Tsting.pdb
