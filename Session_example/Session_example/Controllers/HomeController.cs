@@ -20,7 +20,7 @@ namespace Session_example.Controllers
 
             return View();
         }
-
+        
         public ActionResult Contact()
         {
             ViewBag.Message = "Your contact page.";
