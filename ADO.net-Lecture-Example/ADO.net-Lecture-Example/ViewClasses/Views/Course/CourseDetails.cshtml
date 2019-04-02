@@ -1,0 +1,28 @@
+﻿@using ViewClasses.Models
+
+@{
+    var course = (Course)ViewData["course"];
+}
+
+<p>
+
+</p>
+<table align="center">
+    <tr>
+        <th>Course:</th>
+        <td>@course.Name</td>
+    </tr>
+    <tr>
+        <th>Description:</th>
+        <td>@course.Description</td>
+    </tr>
+    <tr>
+        <th>Course Manager:</th>
+        <td>@course.ManagerName</td>
+    </tr>
+
+</table>
+
+<style>
+    tr, td { padding:2px }
+</style>

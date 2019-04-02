@@ -9,7 +9,7 @@ namespace Session_example.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Index() 
         {
             return View();
         }
@@ -27,7 +27,11 @@ namespace Session_example.Controllers
 
             return View();
         }
-      
+        public ActionResult Login()
+        {
+            return View();
+        }
+        []
         public ActionResult Login(string username)
         {
 
