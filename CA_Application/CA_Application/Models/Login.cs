@@ -11,6 +11,7 @@ namespace CA_Application.Models
         [Required(ErrorMessage = "Username is Required.. ")]
 
         public string Username { get; set; }
+
         [Required(ErrorMessage = "Password is Required..")]
         public string Password { set; get; }
 

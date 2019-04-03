@@ -21,14 +21,14 @@
                 <tr><th colspan="2" class="Login">Login</th> </tr>
                 <tr>
                     <th>@Html.LabelFor(x => x.Username)</th>
-                    <td>@Html.TextBoxFor(x => x.Username)&nbsp;&nbsp;@Html.ValidationMessageFor(x => x.Username)</td>
+                    <td>@Html.TextBoxFor(x => x.Username)</td><td>@Html.ValidationMessageFor(x => x.Username)</td>
                 </tr>
                 <tr>
                     <th>@Html.LabelFor(x => x.Password)</th>
-                    <td>@Html.PasswordFor(x => x.Password)&nbsp;&nbsp;@Html.ValidationMessageFor(x => x.Password)</td>
+                    <td>@Html.PasswordFor(x => x.Password)</td><td>@Html.ValidationMessageFor(x => x.Password)</td>
                 </tr>
                 <tr>
-                    <td colspan="2">
+                    <td colspan="3">
                         <label class="field-validation-error">@Html.DisplayFor(model => model.LoginErrorMessage)</label>
                     </td>
                 </tr>

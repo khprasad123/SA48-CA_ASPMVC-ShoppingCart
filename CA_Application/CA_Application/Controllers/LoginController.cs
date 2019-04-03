@@ -20,7 +20,7 @@ namespace CA_Application.Controllers
         public ActionResult Index(Login user)
         {
             ViewData["ErrorLogin"] = " ";
-            if (user.Username == null)
+            if (user.Username == null|| user.Password==null)
                 return View();
             User Customer = UserQueries.checkLogin(user);
 
