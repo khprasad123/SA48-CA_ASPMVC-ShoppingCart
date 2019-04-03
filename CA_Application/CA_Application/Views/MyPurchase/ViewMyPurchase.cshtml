@@ -1,0 +1,91 @@
+﻿@using CA_Application.Models
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>MyPurchases</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" media="screen" href="~/CSS/Style.css" />
+</head>
+<body>
+    @{
+        var sessionId = ViewData["SessionId"];
+        var Customer = (User)ViewData["User"];
+        var ORDERS = (List < OrderModel>)ViewData["MyOrders"];
+        var count = ViewData["Count"];
+    }
+    <header>
+        <div class="logo">
+            Software<span> Store</span>
+        </div>
+
+
+        <div class="links">
+            <ul>
+
+                <li>
+                    @Html.ActionLink("Continue Shopping", "Index", "DashBoard", new { sessionId = sessionId ,Search=""}, null)
+                </li>
+                <li class="logout">
+                    @Html.ActionLink("Logout", "Index", "Logout", new { sessionId = sessionId }, null)  @*removing the session from the database to be done*@
+                </li>
+            </ul>
+        </div>
+
+        <div class="btn-cart">
+            <div class="cart-text">
+                <i class="fa fa-shopping-cart"></i>
+                <div class="count">@count</div>
+            </div>
+        </div>
+
+
+    </header>
+    <main>
+
+        <h2>
+            &nbsp;&nbsp;View Purchases
+        </h2>
+        <div class="products">
+
+            @foreach (var ITEM in ORDERS)
+            {
+                
+            <div class="product">
+                <div class="product-image">
+                    <img src="@ITEM.item.ImageURL" />
+                </div>
+                <div class="product-title">
+                    @ITEM.item.ProductName
+                </div>
+                <div class="product-description">
+                    Order ID: @ITEM.OrderId<br />
+                    Purchased On: @ITEM.DateOfPurchase
+                </div>
+                <div class="Quantity">
+                   Quantity : @ITEM.Quantity<br />
+                
+                </div>
+                <select name="Activations" style="width:158px;">
+                    @foreach (var i in ITEM.ActivationCode)
+                    {
+                        <option> @i </option>
+                    }
+                </select>
+                <button class="add-to-cart" type="submit">
+                    Download
+                </button>
+            </div>
+            }
+        </div>
+    </main>
+
+
+
+</body>
+</html>

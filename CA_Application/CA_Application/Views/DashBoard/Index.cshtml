@@ -1,0 +1,94 @@
+﻿@using CA_Application.Models;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>DashBoard</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" media="screen" href="~/CSS/Style.css" /> 
+</head>
+<body>
+    @{
+        var sessionId = ViewData["SessionId"];
+        var Customer = (User)ViewData["User"];
+        var PRODUCTS = (List<Product>)ViewData["Products"];
+        var count = ViewData["Count"];
+    }
+    <header>
+        <div class="logo">
+            Software<span> Store</span>
+        </div>
+        <div class="links">
+            <ul>
+                <li>
+                    @Html.ActionLink("My Purchases", "ViewMyPurchase", "MyPurchase", new { sessionId = sessionId }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("View Cart", "CartView", "Cart", new { sessionId = sessionId }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Logout", "Index", "Logout", new { sessionId = sessionId }, null)  @*removing the session from the database to be done*@
+                </li>
+            </ul>
+        </div>
+        <div class="btn-cart">
+            <div class="cart-text">
+                <i class="fa fa-shopping-cart"></i>
+                <div class="count">@count</div>
+            </div>
+        </div>
+    </header>
+    <main>
+        <h2>
+            Hello &nbsp;&nbsp; @Customer.FullName
+        </h2>
+        <div class="search">
+            @using (Html.BeginForm("Index", "DashBoard", FormMethod.Post))
+            {
+
+                <input type="text" name="Search" value="" placeholder="Search...Products">
+                <input type="hidden" name="sessionId" value="@sessionId" />
+                <input type="submit" value="Search">
+            }
+        </div>
+        <div class="products">
+            @foreach (var Product in PRODUCTS)
+            {
+                using (Html.BeginForm("AddToCart", "Cart", FormMethod.Post))
+                {
+                    <div class="product">
+                        <div class="product-image">
+                            <img src="@Product.ImageURL" />
+                        </div>
+                        <div class="product-title">
+                            @Product.ProductName
+                        </div>
+                        <div class="product-description">
+                            @Product.Description
+                        </div>
+                        <div class="product-price">
+                            $@Product.Price
+                        </div>
+                        <div class="Quantity">
+                            <input type="hidden" min="1" max="20" name="Quantity" value="1" />
+                            <input type="hidden" name="ProductId" value="@Product.ProductId" />
+                            <input type="hidden" name="SessionId" value="@sessionId" />
+                            <input type="hidden" name="UserName" value="@Customer.Username" />
+                        </div>
+                        <button class="add-to-cart" type="submit">
+                            Add To Cart
+                        </button>
+                    </div>
+                }
+            }
+        </div>
+    </main>
+
+
+
+
+</body>
+</html>

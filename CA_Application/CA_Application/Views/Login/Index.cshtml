@@ -1,35 +1,24 @@
 ﻿@model CA_Application.Models.Login
-
 @{
     Layout = null;
 }
-
 <!DOCTYPE html>
-
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Login Page</title>
-    <style type="text/css">
-        #login-div {
-            position: absolute;
-            left: 40%;
-            top: 40%;
-            border: 1px solid #ccc;
-            padding: 10px 10px;
-        }
-
-        .field-validation-error {
-            color: red;
-        }
-    </style>
+    <link rel="stylesheet" type="text/css" media="screen" href="~/CSS/Login.css" />
 </head>
-<body>
 
+<body>
+@{ 
+    var error = ViewData["ErrorLogin"];
+}
     <div id="login-div">
         @using (@Html.BeginForm("Index", "Login", FormMethod.Post))
         {
             <table align="center">
+                <tr><th colspan="2" class="Login">Login</th> </tr>
                 <tr>
                     <th>@Html.LabelFor(x => x.Username)</th>
                     <td>@Html.TextBoxFor(x => x.Username)&nbsp;&nbsp;@Html.ValidationMessageFor(x => x.Username)</td>
@@ -45,8 +34,9 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td align="right"><input type="submit" value="Login" /></td>
+                    <td><input type="submit" class="button" value="Login" /></td>
                 </tr>
+                <tr><td></td><td class="field-validation-error">@error</td></tr>
             </table>
         }
     </div>

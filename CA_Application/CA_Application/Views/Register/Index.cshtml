@@ -27,7 +27,7 @@
 <body>
     <div id="login-div">
         @{
-            var error = ViewData["output"];
+            var error =(string) ViewData["output"];
         }
         @using (@Html.BeginForm("Index", "Register", FormMethod.Post))
         {
@@ -47,7 +47,7 @@
                 <tr>
                     <td colspan="2" align="right"><input type="submit" value="Register" /></td>
                 </tr>
-                <tr><td><input type="text" readonly value="@error" /></td></tr>
+                <tr><td><input type="text" readonly value="@error" class="field-validation-error"/></td></tr>
             </table>
         }
     </div>

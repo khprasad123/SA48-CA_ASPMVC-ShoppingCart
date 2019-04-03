@@ -25,6 +25,7 @@ namespace CA_Application.Controllers
             if (!f){ //if false
                 Debug.WriteLine("hey the input dosent happen");
                 ViewData["output"] = "Username Already exist";
+                return View();
             }
             ViewData["output"] = "Input Succeded";
             return View();

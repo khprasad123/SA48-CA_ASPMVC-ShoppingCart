@@ -1,0 +1,83 @@
+﻿@using CA_Application.Models;
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>CART</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
+    <link rel="stylesheet" type="text/css" media="screen" href="~/CSS/Style.css" />
+</head>
+<body>
+    @{
+        var sessionId = ViewData["SessionId"];
+        var Customer = (User)ViewData["User"];
+        var CART_ITEMS = (List<CartDisplay>)ViewData["MyCart"];
+        var count = ViewData["Count"];
+        var Cart_Total = ViewData["Cart-Total"];
+    }
+    <header>
+        <div class="logo">
+            Software<span> Store</span>
+        </div>
+        <div class="links">
+            <ul>
+                <li>
+                    @Html.ActionLink("Continue Shopping", "Index", "DashBoard", new { sessionId = sessionId,Search=""}, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Checkout", "Checkout", "MyPurchase", new { sessionId = sessionId }, null)
+                </li>
+                <li>
+                    @Html.ActionLink("Logout", "Index", "Logout", new { sessionId = sessionId }, null)  @*removing the session from the database to be done*@
+                </li>
+            </ul>
+        </div>
+        <div class="btn-cart">
+            <div class="cart-text">
+                <i class="fa fa-shopping-cart"></i>
+                <div class="count">@count</div>
+            </div>
+        </div>
+        </header>
+        <main>
+            <h2>
+                @Customer.FullName  <br />&nbsp;&nbsp;Here Is Your Cart Total : $@Cart_Total
+            </h2>
+            <div class="products">
+            
+                @foreach (var item in CART_ITEMS)
+                {
+                    using (Html.BeginForm("UpdateCart", "Cart", FormMethod.Post))
+                    {
+                        <div class="product">
+                            <div class="product-image">
+                                <img src="@item.CartItem.ImageURL" />
+                            </div>
+                            <div class="product-title">
+                                @item.CartItem.ProductName
+                            </div>
+                            <div class="product-description">
+                                @item.CartItem.Description
+                            </div>
+                            <div class="product-price">
+                              @item.Quantity x $@item.CartItem.Price = $@item.Item_Total
+                            </div>
+                            <div class="Quantity">
+                                <input type="number" min="0" max="20" name="Quantity" value="@item.Quantity" />
+                                <input type="hidden" name="ProductId" value="@item.CartItem.ProductId" />
+                                <input type="hidden" name="SessionId" value="@sessionId" />
+                                <input type="hidden" name="UserName" value="@Customer.Username" />
+                            </div>
+                            <button class="add-to-cart" type="submit">
+                                Update
+                            </button>
+                        </div>
+                    }
+                }
+            </div>
+        </main>
+</body>
+</html>

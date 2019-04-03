@@ -8,12 +8,12 @@
     <ProductVersion>
     </ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{400572C0-46B4-4503-8055-CC85442DD37A}</ProjectGuid>
+    <ProjectGuid>{EE8A8890-4B2C-4C8B-9116-079CDB55E096}</ProjectGuid>
     <ProjectTypeGuids>{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>CA_Application</RootNamespace>
-    <AssemblyName>CA_Application</AssemblyName>
+    <RootNamespace>Login</RootNamespace>
+    <AssemblyName>Login</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
     <UseIISExpress>true</UseIISExpress>
@@ -126,48 +126,25 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
-    <Compile Include="Controllers\CartController.cs" />
-    <Compile Include="Controllers\DashBoardController.cs" />
-    <Compile Include="Controllers\LoginController.cs" />
-    <Compile Include="Controllers\LogoutController.cs" />
-    <Compile Include="Controllers\MyPurchaseController.cs" />
-    <Compile Include="Controllers\RegisterController.cs" />
-    <Compile Include="DB\ActivationCodeQuery.cs" />
-    <Compile Include="DB\CartOperations.cs" />
-    <Compile Include="DB\Data.cs" />
-    <Compile Include="DB\OrderOperations.cs" />
-    <Compile Include="DB\ProductQueries.cs" />
-    <Compile Include="DB\RegistrationQuery.cs" />
-    <Compile Include="DB\SessionOperations.cs" />
-    <Compile Include="DB\UserQueries.cs" />
-    <Compile Include="Filters\AuthenticationFilter.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Database\UserQuery.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\CartDisplay.cs" />
-    <Compile Include="Models\Cart.cs" />
-    <Compile Include="Models\OrderModel.cs" />
-    <Compile Include="Models\Product.cs" />
-    <Compile Include="Models\Register.cs" />
-    <Compile Include="Models\Login.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Utility\HashClass.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
-    <Content Include="CSS\Login.css" />
-    <Content Include="CSS\Style.css" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="libman.json" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.3.1.js" />
     <Content Include="Scripts\jquery-3.3.1.min.js" />
@@ -190,15 +167,13 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Login\Index.cshtml" />
-    <Content Include="Views\Register\Index.cshtml" />
-    <Content Include="Views\DashBoard\Index.cshtml" />
-    <Content Include="Views\Cart\CartView.cshtml" />
-    <Content Include="Views\MyPurchase\ViewMyPurchase.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="JAVASCRIPT\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />
@@ -229,9 +204,9 @@
         <WebProjectProperties>
           <UseIIS>True</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52980</DevelopmentServerPort>
+          <DevelopmentServerPort>51580</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:52980/</IISUrl>
+          <IISUrl>http://localhost:51580/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

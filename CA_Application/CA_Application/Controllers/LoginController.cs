@@ -19,18 +19,19 @@ namespace CA_Application.Controllers
         [HttpPost]
         public ActionResult Index(Login user)
         {
+            ViewData["ErrorLogin"] = " ";
             if (user.Username == null)
                 return View();
+            User Customer = UserQueries.checkLogin(user);
 
-            if (UserQueries.checkLogin(user))
+            if (Customer == null)
             {
-                //if valid user
-
-                Debug.WriteLine
-
+                ViewData["ErrorLogin"] = "Invalid Credentials..";
+                return View();
             }
-            
-            return View();
+
+            string sessionId = SessionOperations.CreateSession(Customer.Username);  //going to the DashBoard
+            return RedirectToAction("Index", "DashBoard", new {sessionId,Search=""});
         }
     }
 }
