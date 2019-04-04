@@ -54,7 +54,7 @@ header {
         .links ul li {
             display: inline;
             margin-right: 20px;
-            margin-left:40px;
+            margin-left: 40px;
         }
 
 .btn-cart {
@@ -83,6 +83,7 @@ header {
     bottom: 40px;
     left: 59px;
 }
+
 main {
     width: 1080px;
     margin: auto;
@@ -95,28 +96,47 @@ main {
         text-align: center;
         margin: 45px 0;
     }
-.search{
-    margin-top:auto;
-    margin-bottom:17px;
-    align-content:center;
+
+.search {
+    margin-top: auto;
+    margin-bottom: 17px;
+    align-content: center;
 }
 .products {
     display: flex;
-    justify-content: space-around;
-    flex-wrap: wrap;
-    align-content:flex-start;
+    justify-content: center;
+    flex-direction: column;
+    align-items:center;
 }
 
 .product {
     padding: 20px 30px;
     text-align: center;
-    width: 240px;
     transition: box-shadow .4s;
+  
+    display: flex;
 }
 
-    .product:hover {
-        box-shadow: rgba(0, 0, 0, .25) 0px 0px 16px 0px;
+.product-details {
+    margin-top:auto;
+    width: 240px;
+}
+
+.purchase-details {
+
+    align-self: center;
+    flex-grow: 1;
+    text-align: left;
+}
+
+    .purchase-details table {
+        margin: auto;
+        margin-left:20px;
     }
+
+.product:hover {
+    box-shadow: rgba(0, 0, 0, .25) 0px 0px 16px 0px;
+}
 
 .product-image {
     height: 200px;
@@ -128,8 +148,10 @@ main {
     }
 
 .product-title {
+
     color: #555;
     margin: 10px 0;
+    margin-top:-30px;
 }
 
 .product-price {

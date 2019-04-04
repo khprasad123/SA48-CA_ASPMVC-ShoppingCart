@@ -34,12 +34,17 @@
                 </li>
             </ul>
         </div>
+       
         <div class="btn-cart">
-            <div class="cart-text">
-                <i class="fa fa-shopping-cart"></i>
-                <div class="count">@count</div>
-            </div>
+            <a href="@Url.Action("CartView", "Cart", new { sessionId })">
+                <div class="cart-text">
+                    <i class="fa fa-shopping-cart"></i>
+                    <div class="count">@count</div>
+                </div>
+            </a>
         </div>
+
+
     </header>
     <main>
         <h2>

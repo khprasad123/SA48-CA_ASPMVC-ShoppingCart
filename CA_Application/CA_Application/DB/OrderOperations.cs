@@ -13,25 +13,30 @@ namespace CA_Application.DB
         public static void CartToOrderDetails(string UserName)
         {
             List<Cart> CART_ITEM = CartOperations.GetCartByUser(UserName);  //contains the cart items for the user it should conver to order
-            string random = Guid.NewGuid().ToString();   //for creating a random string for making the order ID
-            string OrderID =random.Substring(1,6);  
+            string random = Guid.NewGuid().ToString();   //for creating a random string for making the order ID 
             foreach (Cart cart_item in CART_ITEM)
             {
-                AddToOrderByProduct(cart_item, OrderID);
+                AddToOrderByProduct(cart_item);
             }
 
         }
 
-        public static bool AddToOrderByProduct(Cart cart,string OrderID)
+        public static bool AddToOrderByProduct(Cart cart)
         {
             using (SqlConnection conn = new SqlConnection(CA_Application.DB.Data.connectionString))
             {
                 conn.Open();
                 int count = 0;
+                string Date = DateTime.Now.ToString("M/d/yyyy"); //getting todays date
                 string sql = @"INSERT INTO [dbo].[OrderDetails]
-                              ([OrderId],[UserName],[ProductId],[Quantity],[DateOfOrder]) VALUES
-                              ('"+OrderID+"','" + cart.UserName + "','" + cart.ProductId + "','" + cart.Quantity +"','"
-                                +DateTime.Now.ToString("M/d/yyyy")+"')";
+                              ([UserName],[ProductId],[Quantity],[DateOfOrder]) VALUES
+                              ('"+cart.UserName + "','" + cart.ProductId + "','" + cart.Quantity +"','"
+                                +Date+"')";
+                if (OrderExistInTheSameDay(cart, Date)) {
+                    sql = @"UPDATE [dbo].[OrderDetails] SET Quantity=Quantity+"+cart.Quantity +" where ProductId='" + cart.ProductId + "'" +
+                                " and UserName='" + cart.UserName + "' and DateOfOrder ='" + Date + "'";
+                }
+
                 //assignning session id as orderid -for uniqueness ---untracable   
                 //this funtion will add the cart elements to the order table
                 SqlCommand cmd = new SqlCommand(sql, conn);
@@ -40,9 +45,9 @@ namespace CA_Application.DB
                 {
                     string ActivationCode = Guid.NewGuid().ToString();
                     //adding the activation code to the table
-                    sql = @"INSERT INTO [dbo].[OrderActivationCode]
-                              ([OrderId],[ProductId],[ActivationCode]) VALUES
-                              ('" + OrderID + "','" + cart.ProductId + "','" + ActivationCode + "')";
+                      sql = @"INSERT INTO [dbo].[OrderActivationCode]
+                              ([UserName],[ProductId],[ActivationCode],[DateOfPurchase]) VALUES
+                            ('" + cart.UserName + "','" + cart.ProductId + "','" + ActivationCode + "','"+ Date + "')";
 
                     cmd = new SqlCommand(sql, conn);
                     count = cmd.ExecuteNonQuery();
@@ -65,12 +70,12 @@ namespace CA_Application.DB
                     
                     temp.Customer = UserQueries.GetUserByUserName((string)reader["UserName"]);
                     temp.item = ProductQueries.GetProductByProductId((int)reader["ProductId"]);
-                    temp.OrderId = (string)reader["OrderId"];
+                    temp.OrderId = (int)reader["OrderId"];
                     temp.Quantity = (int)reader["Quantity"];
                     temp.DateOfPurchase = (string)reader["DateOfOrder"];
 
                     //getting activation code
-                    temp.ActivationCode = ActivationCodeQuery.GetActivationCode(temp.OrderId, temp.item.ProductId);
+                    temp.ActivationCode = ActivationCodeQuery.GetActivationCode(temp.DateOfPurchase, temp.item.ProductId,temp.Customer.Username);
                     list.Add(temp);
                 }
             }
@@ -78,29 +83,17 @@ namespace CA_Application.DB
             return list;
         }
 
-        public static bool isItemExist(Cart cart)   //finding any existring product in the order
+        public static bool OrderExistInTheSameDay(Cart cart, string Date)
         {
-
             using (SqlConnection conn = new SqlConnection(CA_Application.DB.Data.connectionString))
             {
                 conn.Open();
-                string sql = @"SELECT COUNT(*) FROM [dbo].[Cart]
-                    WHERE UserName= '" + cart.UserName + "' and ProductId='" + cart.ProductId + "'";
+                string sql = @"SELECT COUNT(*) FROM [dbo].[OrderDetails]
+                    WHERE UserName= '" + cart.UserName + "' and ProductId='" + cart.ProductId +"' and DateOfOrder ='"+Date+"'";
                 SqlCommand cmd = new SqlCommand(sql, conn);
-                int count = (int)cmd.ExecuteScalar();  // finnding there already in the cart for that particular session id
-
-                if (count == 1)
-                {
-                    sql = @"UPDATE [dbo].[Cart] SET Quantity=Quantity+" + 1 + " where ProductId='" + cart.ProductId + "' and UserName='"
-                                    + cart.UserName + "'";
-                    cmd = new SqlCommand(sql, conn);
-                    cmd.ExecuteNonQuery();
-                    return true;
-                }
-                return false;  //there is no excisting product in the cart
-
+                int count = (int)cmd.ExecuteScalar();  // 
+                return (count==1);  //there is no excisting product in the cart
             }
         }
-
     }
 }

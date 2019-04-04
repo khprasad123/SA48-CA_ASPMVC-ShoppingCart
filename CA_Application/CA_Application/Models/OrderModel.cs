@@ -7,7 +7,7 @@ namespace CA_Application.Models
 {
     public class OrderModel
     {
-        public string OrderId { set; get; }
+        public int OrderId { set; get; }
         public User Customer { get; set; }
         public Product item { get; set; }
         public int Quantity { set; get; }

@@ -10,7 +10,7 @@
     <meta name="viewport" content="width=device-width" />
     <title>MyPurchases</title>
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous" />
-    <link rel="stylesheet" type="text/css" media="screen" href="~/CSS/Style.css" />
+    <link rel="stylesheet" type="text/css" media="screen" href="~/CSS/Style2.css" />
 </head>
 <body>
     @{
@@ -29,7 +29,7 @@
             <ul>
 
                 <li>
-                    @Html.ActionLink("Continue Shopping", "Index", "DashBoard", new { sessionId = sessionId ,Search=""}, null)
+                    @Html.ActionLink("Continue Shopping", "Index", "DashBoard", new { sessionId = sessionId, Search = "" }, null)
                 </li>
                 <li class="logout">
                     @Html.ActionLink("Logout", "Index", "Logout", new { sessionId = sessionId }, null)  @*removing the session from the database to be done*@
@@ -38,10 +38,12 @@
         </div>
 
         <div class="btn-cart">
-            <div class="cart-text">
-                <i class="fa fa-shopping-cart"></i>
-                <div class="count">@count</div>
-            </div>
+            <a href="@Url.Action("CartView", "Cart", new { sessionId })">
+                <div class="cart-text">
+                    <i class="fa fa-shopping-cart"></i>
+                    <div class="count">@count</div>
+                </div>
+            </a>
         </div>
 
 
@@ -57,29 +59,45 @@
             {
                 
             <div class="product">
-                <div class="product-image">
-                    <img src="@ITEM.item.ImageURL" />
+                <div class="product-details">
+                    <div class="product-image">
+                        <img src="@ITEM.item.ImageURL" />
+                    </div>
+                    <div class="product-title">
+                        @ITEM.item.ProductName
+                    </div>
+                    <div class="product-description">
+                        @ITEM.item.Description
+                    </div>
+                    <button class="add-to-cart" type="submit">
+                        Download
+                    </button>
                 </div>
-                <div class="product-title">
-                    @ITEM.item.ProductName
+              
+                <div class="purchase-details">
+                    <table>
+                        <tr>
+                            <td>Purchased On: </td>
+                            <td>@ITEM.DateOfPurchase</td>
+                        </tr>
+                        <tr>
+                            <td>Quantity:</td>
+                            <td> @ITEM.Quantity</td>
+                        </tr>
+                        <tr>
+                            <td>Activation Code:</td>
+                            <td><select name="Activations" style="width:158px;">
+                                    @foreach (var i in ITEM.ActivationCode)
+                                         {
+                                              <option> @i </option>
+                                         }
+                                </select>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
-                <div class="product-description">
-                    Order ID: @ITEM.OrderId<br />
-                    Purchased On: @ITEM.DateOfPurchase
-                </div>
-                <div class="Quantity">
-                   Quantity : @ITEM.Quantity<br />
-                
-                </div>
-                <select name="Activations" style="width:158px;">
-                    @foreach (var i in ITEM.ActivationCode)
-                    {
-                        <option> @i </option>
-                    }
-                </select>
-                <button class="add-to-cart" type="submit">
-                    Download
-                </button>
+              
+
             </div>
             }
         </div>

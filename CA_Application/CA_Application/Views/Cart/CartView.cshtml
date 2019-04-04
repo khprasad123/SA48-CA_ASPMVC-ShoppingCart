@@ -25,7 +25,7 @@
         <div class="links">
             <ul>
                 <li>
-                    @Html.ActionLink("Continue Shopping", "Index", "DashBoard", new { sessionId = sessionId,Search=""}, null)
+                    @Html.ActionLink("Continue Shopping", "Index", "DashBoard", new { sessionId = sessionId, Search = "" }, null)
                 </li>
                 <li>
                     @Html.ActionLink("Checkout", "Checkout", "MyPurchase", new { sessionId = sessionId }, null)
@@ -36,12 +36,14 @@
             </ul>
         </div>
         <div class="btn-cart">
-            <div class="cart-text">
-                <i class="fa fa-shopping-cart"></i>
-                <div class="count">@count</div>
-            </div>
+            <a href="@Url.Action("CartView", "Cart", new { sessionId })">
+                <div class="cart-text">
+                    <i class="fa fa-shopping-cart"></i>
+                    <div class="count">@count</div>
+                </div>
+            </a>
         </div>
-        </header>
+    </header>
         <main>
             <h2>
                 @Customer.FullName  <br />&nbsp;&nbsp;Here Is Your Cart Total : $@Cart_Total
