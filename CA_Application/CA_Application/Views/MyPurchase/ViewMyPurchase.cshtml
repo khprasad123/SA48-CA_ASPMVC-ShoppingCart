@@ -29,7 +29,7 @@
             <ul>
 
                 <li>
-                    @Html.ActionLink("Continue Shopping", "Index", "DashBoard", new { sessionId = sessionId, Search = "" }, null)
+                    @Html.ActionLink("Home", "Index", "DashBoard", new { sessionId = sessionId, Search = "" }, null)
                 </li>
                 <li class="logout">
                     @Html.ActionLink("Logout", "Index", "Logout", new { sessionId = sessionId }, null)  @*removing the session from the database to be done*@

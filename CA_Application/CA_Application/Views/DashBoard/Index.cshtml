@@ -27,9 +27,6 @@
                     @Html.ActionLink("My Purchases", "ViewMyPurchase", "MyPurchase", new { sessionId = sessionId }, null)
                 </li>
                 <li>
-                    @Html.ActionLink("View Cart", "CartView", "Cart", new { sessionId = sessionId }, null)
-                </li>
-                <li>
                     @Html.ActionLink("Logout", "Index", "Logout", new { sessionId = sessionId }, null)  @*removing the session from the database to be done*@
                 </li>
             </ul>
