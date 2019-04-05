@@ -17,7 +17,8 @@ namespace CA_Application.DB
             using (SqlConnection conn = new SqlConnection(Data.connectionString))
             {
                 conn.Open();
-                string sql = @"SELECT * from [dbo].[ProductDetails] where Description Like '%" + Search + "%'";
+                string sql = @"SELECT * from [dbo].[ProductDetails] where Description Like '%" + Search + "%' or ProductName Like" +
+                    "'%"+Search+"%'" ;
                 SqlCommand cmd = new SqlCommand(sql, conn); //executing the cammand
                 SqlDataReader reader = cmd.ExecuteReader();
                 while (reader.Read())    //getting all the producat details
