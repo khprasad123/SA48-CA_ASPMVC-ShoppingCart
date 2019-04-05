@@ -77,16 +77,16 @@
                 <div class="purchase-details">
                     <table>
                         <tr>
-                            <td>Purchased On: </td>
-                            <td>@ITEM.DateOfPurchase</td>
+                            <td>Purchased On</td>
+                            <td>:&nbsp;@ITEM.DateOfPurchase</td>
                         </tr>
                         <tr>
-                            <td>Quantity:</td>
-                            <td> @ITEM.Quantity</td>
+                            <td>Quantity</td>
+                            <td>:&nbsp;@ITEM.Quantity</td>
                         </tr>
                         <tr>
-                            <td>Activation Code:</td>
-                            <td><select name="Activations" style="width:158px;">
+                            <td>Activation Code</td>
+                            <td>:&nbsp;<select name="Activations" style="width:158px;">
                                     @foreach (var i in ITEM.ActivationCode)
                                          {
                                               <option> @i </option>

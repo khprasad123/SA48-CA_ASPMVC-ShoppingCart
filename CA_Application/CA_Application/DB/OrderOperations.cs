@@ -27,7 +27,7 @@ namespace CA_Application.DB
             {
                 conn.Open();
                 int count = 0;
-                string Date = DateTime.Now.ToString("M/d/yyyy"); //getting todays date
+                string Date = DateTime.Now.ToString("dd/MM/yyyy"); //getting todays date
                 string sql = @"INSERT INTO [dbo].[OrderDetails]
                               ([UserName],[ProductId],[Quantity],[DateOfOrder]) VALUES
                               ('"+cart.UserName + "','" + cart.ProductId + "','" + cart.Quantity +"','"
